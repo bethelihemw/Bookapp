@@ -35,7 +35,7 @@ fun LoginScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(id = R.drawable.flower1),
+            painter = painterResource(id = R.drawable.login_background),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -123,9 +123,9 @@ fun LoginScreen(
                         IconButton(onClick = { passwordVisible = !passwordVisible }) {
                             Icon(
                                 imageVector = if (passwordVisible) {
-                                    Icons.Default.Home
+                                    Icons.Default.Visibility
                                 } else {
-                                    Icons.Default.Lock
+                                    Icons.Default.VisibilityOff
                                 },
                                 contentDescription = if (passwordVisible) "Hide password" else "Show password"
                             )

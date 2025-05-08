@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -27,6 +28,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 
 data class BookItem(
     val title: String,
@@ -36,6 +41,7 @@ data class BookItem(
 
 @Composable
 fun HomePage() {
+    var searchText by remember { mutableStateOf("") }
     val books = listOf(
         BookItem("I am watching you", "Alice Johnson", R.drawable.flower1), // Replace with your image resources
         BookItem("1984", "Asterix", R.drawable.flower2),
@@ -68,10 +74,11 @@ fun HomePage() {
             }
         }
 
+
         // Search Bar
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = searchText,
+            onValueChange = {newText -> searchText = newText },
             leadingIcon = { Icon(Icons.Filled.Search, contentDescription = "Search") },
             placeholder = { Text("Search for books...") },
             shape = RoundedCornerShape(8.dp),

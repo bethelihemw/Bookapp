@@ -1,5 +1,6 @@
 package com.gs.myapp
 
+//import ImageS
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -13,6 +14,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.gs.myapp.ui.theme.MyAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,6 +25,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+//            val navController = rememberNavController()
+//            Description(navController)
+//            AppNavigation(navController = navController)
+
+
+
 //        val uiState = remember { mutableStateOf(LaunchUiState()) } // Example UI state
 //            LaunchScreen(
 //                uiState = uiState.value,
@@ -34,20 +45,32 @@ class MainActivity : ComponentActivity() {
 //                }
 //            )
 
+//            ImageS()
+            MainScreenWithBottomNav()
 
-//            MainScreenWithBottomNav()
-            SignupScreen(
-                onSignupClick = {
-                    // Handle signup button click
-                    println("Signup button clicked!")
-                    // Add your signup logic here (e.g., navigation, API call)
-                },
-                onLoginClick = {
-                    // Handle login text click
-                    println("Login text clicked!")
-                    // Add your navigation to the login screen here
-                }
-            )
+
+
+
+//            val navController = rememberNavController()
+//            AppNavigation(navController = navController)
+
+
+
+
+
+
+//            SignupScreen(
+//                onSignupClick = {
+//                    // Handle signup button click
+//                    println("Signup button clicked!")
+//                    // Add your signup logic here (e.g., navigation, API call)
+//                },
+//                onLoginClick = {
+//                    // Handle login text click
+//                    println("Login text clicked!")
+//                    // Add your navigation to the login screen here
+//                }
+//            )
 
 
 //            MyAppTheme {
@@ -61,3 +84,11 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+//@Composable
+//fun AppNavigation(navController: NavHostController) {
+//    NavHost(navController = navController, startDestination = "screenA") {
+//        composable("screenA") { LaunchScreen(navController = navController) }
+//        composable("screenB") { LoginScreen() }
+//    }
+//}

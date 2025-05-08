@@ -46,10 +46,12 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
+    implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.material.icons.core) // Or the latest version
     implementation(libs.androidx.material.icons.extended) // Or the latest version (includes Visibility icons)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
+    implementation(libs.coil.kt.coil.compose)
     implementation(libs.androidx.material3)
     implementation(libs.coil.compose)
     testImplementation(libs.junit)

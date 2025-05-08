@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.gs.myapp.GradientButton
 import com.gs.myapp.ui.theme.color1
 import com.gs.myapp.ui.theme.color2
@@ -38,6 +39,7 @@ data class LaunchUiState(
 
 @Composable
 fun LaunchScreen(
+//    navController: NavHostController,
     uiState: LaunchUiState,
     onStartClicked: () -> Unit,
     modifier: Modifier = Modifier
@@ -48,7 +50,7 @@ fun LaunchScreen(
     ) {
         //background Image
         Image(
-            painter = painterResource(id=R.drawable.flower1),
+            painter = painterResource(id=R.drawable.launcher_background),
             contentDescription="Background Image",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
@@ -85,7 +87,7 @@ fun LaunchScreen(
                     AppSlogan()
                 }
             }
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(100.dp))
             GradientButton(
                 text = "Start Swapping",
                 textColor = Color.White,
@@ -96,6 +98,7 @@ fun LaunchScreen(
                     )
                 )
             ) {
+//                navController.navigate("screenB")
                 // TODO: Handle submit logic
             }
 
@@ -131,7 +134,7 @@ fun LaunchScreen(
 @Composable
 private fun AppIcon() {
     Image(
-        painter = painterResource(id=R.drawable.flower1),
+        painter = painterResource(id=R.drawable.launch),
         contentDescription="Logo",
         contentScale = ContentScale.Crop,
         modifier = Modifier

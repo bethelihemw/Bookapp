@@ -1,15 +1,23 @@
 package com.gs.myapp
 
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -18,11 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.rememberAsyncImagePainter
 import com.gs.myapp.ui.theme.color1
 import com.gs.myapp.ui.theme.color2
 //import com.example.bookswap.R
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.text.ifEmpty
 
 @Composable
 fun SignupScreen(
@@ -35,23 +45,90 @@ fun SignupScreen(
     var confirmPassword by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var confirmPasswordVisible by remember { mutableStateOf(false) }
+//    val imageUri = rememberSaveable { mutableStateOf("") }
+//    val painter = rememberAsyncImagePainter(imageUri.value.ifEmpty {R.drawable.flower1 })
+//    val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+//        uri?.let { imageUri.value = it.toString() }
+//    }
 
     Box(modifier = Modifier.fillMaxSize()) {
         Image(
-            painter = painterResource(id = R.drawable.flower1),
+            painter = painterResource(id = R.drawable.background_signup),
             contentDescription = "Background",
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
+//        Box(contentAlignment = Alignment.Center) {
+//            Image(
+//                painter = painter,
+//                contentDescription = "Book Cover",
+//                contentScale = ContentScale.Crop,
+//                modifier = Modifier
+//                    .size(100.dp)
+//                    .border(1.dp, Color.White)
+//            )
+//            Box(modifier = Modifier.align(Alignment.BottomEnd)
+//                .padding(horizontal = 200.dp, vertical = 150.dp)
+//           )
+//            {
+//                Icon(
+//                    imageVector = Icons.Filled.Add,
+//                    contentDescription = "add Icon",
+//                    tint = Color.Black,
+//                    modifier = Modifier
+//                        .size(34.dp)
+////                        .padding(horizontal = 300.dp, vertical = 150.dp)
+//                        .clip(CircleShape)
+//                        .clickable { launcher.launch("image/*") }
+//                )
+//            }
+//        }
+        val imageUri = rememberSaveable { mutableStateOf("") }
+        val painter = rememberAsyncImagePainter(imageUri.value.ifEmpty { R.drawable.flower1 })
+        val launcher = rememberLauncherForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { imageUri.value = it.toString() }
+        }
+
+        Box(
+            modifier = Modifier
+//                    .fillMaxSize() // Make the outer Box take up the whole screen
+                .padding(vertical = 120.dp, horizontal = 120.dp
+                ), // Add some top padding to move it down from the very top
+            contentAlignment = Alignment.TopCenter // Align content to the top center
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Image(
+                    painter = painter,
+                    contentDescription = "Book Cover",
+                    contentScale = ContentScale.Crop,
+                    modifier = Modifier
+                        .size(120.dp)
+                        .clip(CircleShape)
+                        .border(1.dp, Color.White)
+                )
+                Box(modifier = Modifier.align(Alignment.BottomEnd)) {
+                    Icon(
+                        imageVector = Icons.Filled.Add,
+                        contentDescription = "add Icon",
+                        tint = Color.Black,
+                        modifier = Modifier
+                            .size(34.dp)
+                            .clip(CircleShape)
+                            .clickable { launcher.launch("image/*") }
+                    )
+                }
+            }
+        }
 
         // Status Bar at the top
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+
+//        Row(
+//            modifier = Modifier
+//                .fillMaxWidth()
+//                .padding(16.dp),
+//            horizontalArrangement = Arrangement.SpaceBetween,
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
 //            Icon(Icons.Default.Home, contentDescription = null, tint = Color.Black, modifier = Modifier.size(20.dp))
 //            Text(
 //                text = SimpleDateFormat("h:mm a", Locale.getDefault()).format(Date()),
@@ -158,8 +235,8 @@ fun SignupScreen(
                         trailingIcon = {
                             IconButton(onClick = { passwordVisible = !passwordVisible }) {
                                 Icon(
-                                    imageVector = if (passwordVisible) Icons.Default.PlayArrow
-                                    else Icons.Default.Email,
+                                    imageVector = if (passwordVisible) Icons.Default.Visibility
+                                    else Icons.Default.VisibilityOff,
                                     contentDescription = if (passwordVisible) "Hide password"
                                     else "Show password"
                                 )
@@ -185,15 +262,15 @@ fun SignupScreen(
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                         leadingIcon = {
                             Icon(
-                                imageVector = Icons.Default.Menu,
+                                imageVector = Icons.Default.Lock,
                                 contentDescription = "Confirm password icon"
                             )
                         },
                         trailingIcon = {
                             IconButton(onClick = { confirmPasswordVisible = !confirmPasswordVisible }) {
                                 Icon(
-                                    imageVector = if (confirmPasswordVisible) Icons.Default.PlayArrow
-                                    else Icons.Default.Email,
+                                    imageVector = if (confirmPasswordVisible) Icons.Default.Visibility
+                                    else Icons.Default.VisibilityOff,
                                     contentDescription = if (confirmPasswordVisible) "Hide password"
                                     else "Show password"
                                 )
@@ -257,4 +334,3 @@ fun SignupScreen(
 //            }
         }
     }
-}

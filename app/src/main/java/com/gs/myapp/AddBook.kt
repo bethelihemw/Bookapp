@@ -32,7 +32,7 @@ import coil3.compose.rememberAsyncImagePainter
 import com.gs.myapp.ui.theme.color1
 import com.gs.myapp.ui.theme.color2
 import kotlin.text.ifEmpty
-
+import androidx.compose.material3.OutlinedTextField
 @Composable
 fun AddBook() {
     var title by rememberSaveable { mutableStateOf("") }
@@ -157,7 +157,8 @@ fun AddBook() {
 fun CustomTextField(
     value: String,
     onValueChange: (String) -> Unit,
-    placeholder: String
+    placeholder: String,
+    borderColor: Color = Color.Gray
 ) {
     OutlinedTextField(
         value = value,
@@ -166,8 +167,11 @@ fun CustomTextField(
         singleLine = true,
 
         modifier = Modifier.fillMaxWidth().height(50.dp)
+
     )
 }
+
+
 
 @Composable
 fun GradientButton(
